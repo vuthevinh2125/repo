@@ -106,7 +106,6 @@ h2::after {
 
 /* --- HERO SECTION with Abstract Tech Background --- */
 .hero {
-    /* Đã sử dụng đường dẫn cục bộ */
     background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
                       url('images/tech_background.jpg');
     background-size: cover;
@@ -114,7 +113,7 @@ h2::after {
     background-attachment: fixed; 
     
     color: white; 
-    padding: 190px 0;
+    padding: 120px 0;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
@@ -286,7 +285,7 @@ h2::after {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 50%; 
+    left: 50%; /* VỊ TRÍ CHIA ĐÔI */
     width: 3px; 
     background: linear-gradient(to bottom, #007bff 0%, #ffc107 100%); 
     transform: translateX(-50%);
@@ -302,7 +301,7 @@ h2::after {
 .timeline-item::before {
     content: '';
     position: absolute;
-    left: 50%;
+    left: 50%; 
     top: 0;
     width: 15px;
     height: 15px;
@@ -374,7 +373,7 @@ h2::after {
 }
 
 .hidden-details {
-    display: none; /* Ban đầu ẩn nội dung */
+    display: none; 
     margin-top: 10px;
     padding-top: 10px;
     border-top: 1px dashed #ddd;
@@ -426,7 +425,7 @@ h2::after {
     .skill-group:nth-child(even) {
         border-right: none; 
     }
-    /* Chuyển Timeline về 1 cột */
+    /* Timeline trên Tablet */
     .timeline-item, .timeline-item:nth-child(even) {
         flex-direction: column; 
         align-items: flex-start;
@@ -460,6 +459,14 @@ h2::after {
     .timeline-item::before {
         left: 20px; 
         transform: translateX(-50%);
+    }
+    /* Chuyển Skills về 1 cột trên điện thoại */
+    .skill-table-container {
+        grid-template-columns: 1fr; 
+    }
+    .skill-group {
+        border-right: none;
+        border-bottom: 1px solid #eee;
     }
 }
 
