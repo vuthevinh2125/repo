@@ -17,7 +17,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // --- LOGIC CHO ẨN/HIỆN CHI TIẾT (SEE DETAILS) ---
 function toggleDetails(id) {
     const detailsDiv = document.getElementById(id);
-    const button = event.currentTarget; // Lấy nút đã click
+    const button = event.currentTarget; 
 
     if (detailsDiv.style.display === 'none' || detailsDiv.style.display === '') {
         detailsDiv.style.display = 'block';

@@ -7,6 +7,9 @@ body {
     color: #333;
     line-height: 1.6;
     scroll-behavior: smooth;
+    /* FIX: Giúp trình duyệt di động hiển thị đúng tỉ lệ */
+    -webkit-text-size-adjust: 100%; 
+    text-size-adjust: 100%;
 }
 
 .container {
@@ -414,7 +417,9 @@ h2::after {
 }
 
 /* --- MOBILE RESPONSIVE --- */
+/* CÁC ĐIỀU CHỈNH CHUNG TRÊN MOBILE */
 @media (max-width: 992px) {
+    /* Skills */
     .skill-table-container {
         grid-template-columns: repeat(2, 1fr); 
     }
@@ -425,7 +430,7 @@ h2::after {
     .skill-group:nth-child(even) {
         border-right: none; 
     }
-    /* Timeline trên Tablet */
+    /* Timeline (Chuyển về 1 cột trên Tablet) */
     .timeline-item, .timeline-item:nth-child(even) {
         flex-direction: column; 
         align-items: flex-start;
@@ -433,6 +438,11 @@ h2::after {
 }
 
 @media (max-width: 768px) {
+    /* Đảm bảo tiêu đề và Hero có kích thước hợp lý */
+    .hero h1 { font-size: 2em; }
+    .tagline { font-size: 1em; }
+    
+    /* Timeline 1 cột (Đường thẳng bên trái) */
     .timeline-grid::before {
         left: 20px; 
         transform: none;
@@ -448,7 +458,7 @@ h2::after {
         padding-right: 0;
         margin-bottom: 5px;
         font-size: 0.9em;
-        color: #007bff; 
+        color: #007bff; /* Màu thời gian nổi bật */
     }
     .experience-card, .timeline-item:nth-child(even) .experience-card {
         width: 100%;
@@ -460,17 +470,15 @@ h2::after {
         left: 20px; 
         transform: translateX(-50%);
     }
-    /* Chuyển Skills về 1 cột trên điện thoại */
-    .skill-table-container {
-        grid-template-columns: 1fr; 
-    }
-    .skill-group {
-        border-right: none;
-        border-bottom: 1px solid #eee;
+    /* Nút CTA nhỏ hơn */
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.9em;
     }
 }
 
 @media (max-width: 576px) {
+    /* Skills 1 cột trên điện thoại */
     .skill-table-container {
         grid-template-columns: 1fr; 
     }
