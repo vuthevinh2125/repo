@@ -16,7 +16,25 @@
     <nav class="navbar">
         <div class="container nav-content">
             <a href="#top" class="nav-brand">VU THE VINH</a> 
-            <ul class="nav-links">
+            
+            <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div id="mobile-menu" class="mobile-nav-overlay">
+                <button class="close-btn" onclick="toggleMenu()">&times;</button>
+                
+                <ul class="mobile-nav-links">
+                    <li class="nav-link"><a href="#skills" onclick="closeMenu()">SKILLS</a></li>
+                    <li class="nav-link"><a href="#experiences" onclick="closeMenu()">EXPERIENCE</a></li>
+                    <li class="nav-link"><a href="#education" onclick="closeMenu()">EDUCATION</a></li>
+                    <li class="nav-link"><a href="#projects" onclick="closeMenu()">PROJECTS</a></li>
+                    <li class="nav-link"><a href="#achievements" onclick="closeMenu()">ACHIEVEMENTS</a></li> 
+                    <li class="nav-link"><a href="#contact" onclick="closeMenu()">CONTACT</a></li>
+                </ul>
+            </div>
+            
+            <ul class="nav-links desktop-menu">
                 <li class="nav-link"><a href="#skills">SKILLS</a></li>
                 <li class="nav-link"><a href="#experiences">EXPERIENCE</a></li>
                 <li class="nav-link"><a href="#education">EDUCATION</a></li>

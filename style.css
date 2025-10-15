@@ -7,7 +7,6 @@ body {
     color: #333;
     line-height: 1.6;
     scroll-behavior: smooth;
-    /* FIX: Giúp trình duyệt di động hiển thị đúng tỉ lệ */
     -webkit-text-size-adjust: 100%; 
     text-size-adjust: 100%;
 }
@@ -57,6 +56,7 @@ h2::after {
     display: flex;
     justify-content: space-between; 
     align-items: center;
+    padding: 0 5%; /* Thêm padding ngang cho thanh nav */
 }
 
 .nav-brand {
@@ -72,13 +72,17 @@ h2::after {
     transform: translateY(-2px);
 }
 
-.nav-links {
+/* Menu Desktop (Lớn) */
+.desktop-menu {
     display: flex;
     justify-content: center;
     list-style: none;
     padding: 0;
     margin: 0;
     gap: 15px; 
+}
+.menu-toggle {
+    display: none; /* Mặc định ẩn nút Hamburger */
 }
 
 .nav-link a {
@@ -88,7 +92,6 @@ h2::after {
     font-weight: 600;
     border-radius: 8px;
     display: inline-block;
-    
     transition: 
         background-color 0.3s ease, 
         color 0.3s ease, 
@@ -102,11 +105,49 @@ h2::after {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-.nav-link a:active {
-    transform: translateY(0px) scale(1.0); 
-    background-color: #0056b3;
+/* --- MOBILE HAMBURGER MENU (MỚI) --- */
+.mobile-nav-overlay {
+    height: 100%;
+    width: 0; 
+    position: fixed;
+    z-index: 2000; 
+    top: 0;
+    left: 0;
+    background-color: #2c3e50; 
+    overflow-x: hidden;
+    transition: 0.5s;
 }
 
+.mobile-nav-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 36px;
+    color: white;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.mobile-nav-links {
+    list-style-type: none;
+    padding: 100px 0 0 0;
+}
+
+.mobile-nav-links li a {
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #f1f1f1;
+    display: block;
+    transition: 0.3s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav-links li a:hover {
+    background-color: #007bff;
+    color: white;
+}
 /* --- HERO SECTION with Abstract Tech Background --- */
 .hero {
     background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
@@ -288,7 +329,7 @@ h2::after {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 50%; /* VỊ TRÍ CHIA ĐÔI */
+    left: 50%; 
     width: 3px; 
     background: linear-gradient(to bottom, #007bff 0%, #ffc107 100%); 
     transform: translateX(-50%);
@@ -416,10 +457,24 @@ h2::after {
     color: #ffc107;
 }
 
-/* --- MOBILE RESPONSIVE --- */
-/* CÁC ĐIỀU CHỈNH CHUNG TRÊN MOBILE */
+/* --- MOBILE RESPONSIVE (FIX CÁC LỖI TỪ ẢNH TRƯỚC) --- */
+
 @media (max-width: 992px) {
-    /* Skills */
+    /* Menu Hamburger và ẩn menu desktop */
+    .desktop-menu { display: none; }
+    .menu-toggle {
+        display: block; 
+        background: none;
+        border: none;
+        color: #007bff;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+    .nav-content {
+        padding: 15px 5%;
+    }
+    
+    /* Skills - Chuyển về 2 cột trên Tablet */
     .skill-table-container {
         grid-template-columns: repeat(2, 1fr); 
     }
@@ -430,18 +485,26 @@ h2::after {
     .skill-group:nth-child(even) {
         border-right: none; 
     }
-    /* Timeline (Chuyển về 1 cột trên Tablet) */
-    .timeline-item, .timeline-item:nth-child(even) {
-        flex-direction: column; 
-        align-items: flex-start;
-    }
 }
 
 @media (max-width: 768px) {
-    /* Đảm bảo tiêu đề và Hero có kích thước hợp lý */
     .hero h1 { font-size: 2em; }
     .tagline { font-size: 1em; }
     
+    /* Skills - Buộc về 1 cột trên Mobile để tránh tràn */
+    .skill-table-container {
+        grid-template-columns: 1fr; 
+    }
+    .skill-group {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+    
+    /* Projects/Achievements - Buộc về 1 cột */
+    .grid {
+        grid-template-columns: 1fr; 
+    }
+
     /* Timeline 1 cột (Đường thẳng bên trái) */
     .timeline-grid::before {
         left: 20px; 
@@ -451,17 +514,19 @@ h2::after {
         flex-direction: column; 
         align-items: flex-start;
     }
+    
+    /* FIX: CARD & DATE chiếm 100% chiều rộng */
     .timeline-date, .timeline-item:nth-child(even) .timeline-date {
         width: 100%;
         text-align: left;
-        padding-left: 40px; 
+        padding-left: 40px; /* Bắt đầu từ sau đường thẳng */
         padding-right: 0;
         margin-bottom: 5px;
         font-size: 0.9em;
-        color: #007bff; /* Màu thời gian nổi bật */
+        color: #007bff; 
     }
     .experience-card, .timeline-item:nth-child(even) .experience-card {
-        width: 100%;
+        width: 100%; /* FIX QUAN TRỌNG */
         margin-left: 20px;
         padding-left: 20px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -470,20 +535,15 @@ h2::after {
         left: 20px; 
         transform: translateX(-50%);
     }
-    /* Nút CTA nhỏ hơn */
-    .cta-button {
-        padding: 10px 20px;
-        font-size: 0.9em;
-    }
 }
 
-@media (max-width: 576px) {
-    /* Skills 1 cột trên điện thoại */
-    .skill-table-container {
-        grid-template-columns: 1fr; 
+@media (max-width: 450px) {
+    /* Tối ưu hóa cho màn hình rất nhỏ */
+    .cta-button {
+        padding: 8px 15px;
+        font-size: 0.8em;
     }
-    .skill-group {
-        border-right: none;
-        border-bottom: 1px solid #eee;
+    .nav-content {
+        padding: 10px 3%;
     }
 }
