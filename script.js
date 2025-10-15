@@ -1,11 +1,9 @@
 // --- LOGIC CHO CUỘN MƯỢT (SMOOTH SCROLL) ---
-// Đảm bảo việc nhấn vào các mục menu cuộn mượt đến section đó
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        // Ngăn chặn hành vi nhảy trang mặc định
         e.preventDefault();
 
-        // Nếu menu mobile đang mở, đóng nó trước
+        // Nếu menu mobile đang mở, đóng nó trước khi cuộn
         if (window.innerWidth <= 992) {
             closeMenu();
         }
@@ -14,7 +12,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const targetElement = document.querySelector(targetId);
 
         if (targetElement) {
-            // Cuộn mượt đến mục đích
             targetElement.scrollIntoView({
                 behavior: 'smooth'
             });
@@ -41,16 +38,26 @@ function closeMenu() {
 // --- LOGIC CHO ẨN/HIỆN CHI TIẾT (SEE DETAILS) ---
 function toggleDetails(id) {
     const detailsDiv = document.getElementById(id);
-    const button = event.currentTarget; // Lấy nút đã click
+    const button = event.currentTarget; 
 
-    // Kiểm tra trạng thái hiện tại của nội dung
     if (detailsDiv.style.display === 'none' || detailsDiv.style.display === '') {
-        // Nếu đang ẩn (none) hoặc chưa thiết lập style, thì hiện ra
         detailsDiv.style.display = 'block';
-        button.textContent = 'Hide Details'; // Đổi chữ trên nút
+        button.textContent = 'Hide Details';
     } else {
-        // Nếu đang hiện, thì ẩn đi
         detailsDiv.style.display = 'none';
-        button.textContent = 'See Details'; // Đổi chữ trên nút
+        button.textContent = 'See Details';
+    }
+}
+
+// --- LOGIC CHO NÚT SCROLL TO TOP ---
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    const scrollBtn = document.getElementById("scrollUpBtn");
+    // Nếu cuộn xuống hơn 200px so với đầu trang, hiển thị nút
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        scrollBtn.style.display = "block";
+    } else {
+        scrollBtn.style.display = "none";
     }
 }
